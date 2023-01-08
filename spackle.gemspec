@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name          = "spackle-ruby"
   s.version       = "0.0.1"
   s.summary       = "Spackle Ruby gem"
-  s.description   = "Spackle is the easiest way to integrate your Ruby app with Stripe Billing." \
+  s.description   = "Spackle is the easiest way to integrate your Ruby app with Stripe Billing. " \
                     "See https://www.spackle.so for details."
   s.authors       = ["Spackle"]
   s.email         = "support@spackle.so"

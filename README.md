@@ -21,7 +21,7 @@ gem install spackle-ruby
 ```ruby
 source 'https://rubygems.org'
 
-gem 'spackle'
+gem 'spackle-ruby'
 ```
 
 ### Configure your environment
