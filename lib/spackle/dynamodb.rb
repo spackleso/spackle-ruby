@@ -30,6 +30,7 @@ module Spackle
 
 
     def bootstrap_client
+      Util.log_debug('Bootstrapping DynamoDB client...')
       uri = URI(Spackle.api_base + '/auth/session')
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
@@ -39,6 +40,7 @@ module Spackle
 
       response = https.request(request)
       data = JSON.parse(response.body)
+      Util.log_debug("Created session: #{data}")
 
       @identity_id = data['identity_id']
       @table_name = data['table_name']
@@ -73,6 +75,7 @@ module Spackle
     private
 
     def refresh
+      Util.log_debug('Refreshing DynamoDB credentials...')
       c = @client.assume_role_with_web_identity({
         role_arn: @role_arn,
         role_session_name: Base64.strict_encode64(SecureRandom.uuid),

@@ -3,9 +3,11 @@ module Spackle
     @data = nil
 
     def self.retrieve(id)
+      Util.log_debug("Retrieving customer data for #{id}")
       data = Spackle.client.get_item({
         'CustomerId' => id
       })
+      Util.log_debug("Retrieved customer data for #{id}: #{data}")
       Customer.new(data)
     end
 
