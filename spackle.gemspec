@@ -4,11 +4,20 @@ Gem::Specification.new do |s|
   s.name          = "spackle-ruby"
   s.version       = "0.0.1"
   s.summary       = "Spackle Ruby gem"
-  s.description   = "Spackle is the easiest way to integrate your Ruby app with Stripe Billing."
-  s.authors       = ["Hunter Clarke"]
-  s.email         = "hunter@spackle.so"
-  s.homepage      = "https://rubygems.org/gems/spackle-ruby"
+  s.description   = "Spackle is the easiest way to integrate your Ruby app with Stripe Billing." \
+                    "See https://www.spackle.so for details."
+  s.authors       = ["Spackle"]
+  s.email         = "support@spackle.so"
+  s.homepage      = "https://docs.spackle.so/ruby"
   s.license       = "MIT"
+  s.metadata = {
+    "bug_tracker_uri" => "https://github.com/spackleso/spackle-ruby/issues",
+    "documentation_uri" => "https://docs.spackle.so/ruby",
+    "github_repo" => "ssh://github.com/spackleso/spackle-ruby",
+    "homepage_uri" => "https://docs.spackle.so/ruby",
+    "source_code_uri" => "https://github.com/spackleso/spackle-ruby",
+  }
+
   ignored = Regexp.union(
     /\A\.editorconfig/,
     /\A\.git/,
