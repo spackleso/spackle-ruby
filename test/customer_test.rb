@@ -1,15 +1,26 @@
+require 'spackle'
 require 'test/unit'
 
-class SpackleTest < Test::Unit::TestCase
-  def test_retrieve
-    assert(false, 'Not implemented')
-  end
-
+class CustomerTest < Test::Unit::TestCase
   def test_enabled
-    assert(false, 'Not implemented')
+    customer = Spackle::Customer.new({
+      'subscriptions' => [],
+      'features' => [{
+        'key' => 'flag',
+        'value_flag' => true
+      }]
+    })
+    assert customer.enabled('flag')
   end
 
   def test_limit
-    assert(false, 'Not implemented')
+    customer = Spackle::Customer.new({
+      'subscriptions' => [],
+      'features' => [{
+        'key' => 'flag',
+        'value_limit' => 100
+      }]
+    })
+    assert_equal customer.limit('flag'), 100
   end
 end
