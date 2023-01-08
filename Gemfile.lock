@@ -1355,7 +1355,12 @@ GEM
     aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
     jmespath (1.6.2)
+    mini_portile2 (2.8.1)
+    nokogiri (1.13.10)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     power_assert (2.0.3)
+    racc (1.6.2)
     rake (13.0.6)
     test-unit (3.5.7)
       power_assert
@@ -1365,6 +1370,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk (~> 3)
+  nokogiri (~> 1.13)
   rake (~> 13.0)
   test-unit (~> 3.5)
 
