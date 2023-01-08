@@ -17,9 +17,10 @@ gem install spackle-ruby
 ```
 
 ### Bundler
-source 'https://rubygems.org'
 
 ```ruby
+source 'https://rubygems.org'
+
 gem 'spackle'
 ```
 
