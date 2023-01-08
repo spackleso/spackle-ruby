@@ -6,7 +6,6 @@ module Spackle
       data = Spackle.client.get_item({
         'CustomerId' => id
       })
-      puts(data)
       Customer.new(data)
     end
 

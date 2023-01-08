@@ -1,5 +1,4 @@
 $LOAD_PATH.unshift(::File.join(::File.dirname(__FILE__), "lib"))
-puts $LOAD_PATH
 
 Gem::Specification.new do |s|
   s.name          = "spackle-ruby"

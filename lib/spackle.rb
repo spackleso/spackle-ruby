@@ -19,7 +19,6 @@ module Spackle
 
   def self.client
     unless Spackle.api_key.nil?
-      puts 'initializing Spackle client'
       @client ||= Spackle::DynamoDB.new()
     end
   end

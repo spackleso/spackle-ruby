@@ -10,7 +10,6 @@ module Spackle
     @aws_region = nil
 
     def initialize
-      puts 'initializing DynamoDb client'
       @client = bootstrap_client
     end
 
@@ -18,7 +17,6 @@ module Spackle
       key = key.merge({
         'AccountId' => @identity_id,
       })
-      puts key
 
       response = @client.get_item({
         table_name: @table_name,
@@ -75,7 +73,6 @@ module Spackle
     private
 
     def refresh
-      puts 'Refreshing credentials'
       c = @client.assume_role_with_web_identity({
         role_arn: @role_arn,
         role_session_name: Base64.strict_encode64(SecureRandom.uuid),
@@ -86,7 +83,6 @@ module Spackle
         c.secret_access_key,
         c.session_token
       )
-      puts @credentials
       @expiration = c.expiration
     end
   end
