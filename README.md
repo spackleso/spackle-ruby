@@ -2,11 +2,11 @@
 
 [![CI](https://github.com/spackleso/spackle-ruby/actions/workflows/test.yml/badge.svg)](https://github.com/spackleso/spackle-ruby/actions/workflows/test.yml)
 
-The Spackle Python library provides optimized access to billing aware flags created on the Spackle platform.
+The Spackle Ruby library provides optimized access to billing aware flags created on the Spackle platform.
 
 ## Documentation
 
-See the [Python API docs](https://docs.spackle.so/python).
+See the [Ruby API docs](https://docs.spackle.so/ruby).
 
 ## Setup
 
@@ -63,7 +63,7 @@ customer.limit("feature_key")
 ```
 
 ## Logging
-The Spackle Python library emits logs as it performs various internal tasks. You can control the verbosity of Spackle's logging a few different ways:
+The Spackle Ruby library emits logs as it performs various internal tasks. You can control the verbosity of Spackle's logging a few different ways:
 
 1. Set the environment variable SPACKLE_LOG to the value `debug`, `info`, or `error`
 
