@@ -7,7 +7,6 @@ module Spackle
     @client = nil
     @identity_id = nil
     @table_name = nil
-    @aws_region = nil
 
     def initialize
       @client = bootstrap_client
@@ -44,7 +43,6 @@ module Spackle
 
       @identity_id = data['identity_id']
       @table_name = data['table_name']
-      @aws_region = data['aws_region']
 
       credentials = SpackleCredentials.new(
         data['role_arn'],
@@ -52,7 +50,6 @@ module Spackle
       )
 
       Aws::DynamoDB::Client.new(
-        region: @aws_region,
         credentials: credentials,
       )
     end
