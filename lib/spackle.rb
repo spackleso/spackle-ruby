@@ -36,6 +36,9 @@ module Spackle
     self.client
     nil
   end
+
+  class SpackleError < StandardError
+  end
 end
 
 Spackle.log_level = ENV["SPACKLE_LOG"] unless ENV["SPACKLE_LOG"].nil?

@@ -31,7 +31,6 @@ module Spackle
       query[:expression_attribute_values] = query[:expression_attribute_values].merge({
         ':account_id' => @identity_id
       })
-      puts query
       response = @client.query(query)
     end
 
