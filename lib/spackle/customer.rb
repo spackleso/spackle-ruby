@@ -4,8 +4,14 @@ module Spackle
 
     def self.retrieve(id)
       Util.log_debug("Retrieving customer data for #{id}")
-      data = Spackle.client.get_item({
-        'CustomerId' => id
+      data = Spackle.client.query({
+        key_condition_expression: 'CustomerId = :customer_id',
+        filter_expression: 'Version = :version',
+        expression_attribute_values: {
+          ':customer_id' => id,
+          ':version' => Spackle.version
+        },
+        limit: 1
       })
       Util.log_debug("Retrieved customer data for #{id}: #{data}")
       Customer.new(data)

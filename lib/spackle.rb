@@ -23,6 +23,7 @@ module Spackle
     def_delegators :@config, :api_base, :api_base=
     def_delegators :@config, :log_level, :log_level=
     def_delegators :@config, :logger, :logger=
+    def_delegators :@config, :version, :version=
   end
 
   def self.client

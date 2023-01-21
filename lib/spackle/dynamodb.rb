@@ -25,8 +25,17 @@ module Spackle
       JSON.parse(response.item['State'])
     end
 
-    private
+    def query(query)
+      query[:table_name] = @table_name
+      query[:key_condition_expression] = 'AccountId = :account_id AND ' + query[:key_condition_expression]
+      query[:expression_attribute_values] = query[:expression_attribute_values].merge({
+        ':account_id' => @identity_id
+      })
+      puts query
+      response = @client.query(query)
+    end
 
+    private
 
     def bootstrap_client
       Util.log_debug('Bootstrapping DynamoDB client...')
