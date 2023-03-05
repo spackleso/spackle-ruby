@@ -77,3 +77,38 @@ The Spackle Ruby library emits logs as it performs various internal tasks. You c
    ```ruby
    Spackle.log_level = 'debug'
    ```
+
+## Usage in development environments
+In production, Spackle requires a valid Stripe customer. However, that is not development environments where state needs to be controlled. As an alternative, you can use a file store to test your application with seed data.
+
+```json
+/app/spackle.json
+
+{
+  "cus_000000000": {
+    "features": [
+      {
+        "key": "flag_feature",
+        "value_flag": true
+      },
+      {
+        "key": "limit_feature",
+        "value_limit": 100
+      }
+    ],
+    "subscriptions": [
+      {
+        "id": "sub_000000000",
+        "status": "trialing",
+        "quantity": 1
+      }
+    ]
+  }
+}
+```
+
+Then configure the file store in your application:
+
+```ruby
+Spackle.store = Spackle::FileStore.new('/app/spackle.json')
+```
