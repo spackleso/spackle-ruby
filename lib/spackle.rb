@@ -7,6 +7,7 @@ require 'spackle/util'
 
 require 'spackle/stores/base'
 require 'spackle/stores/dynamodb'
+require 'spackle/stores/file'
 
 module Spackle
   @config = Spackle::SpackleConfiguration.new

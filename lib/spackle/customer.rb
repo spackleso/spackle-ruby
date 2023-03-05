@@ -6,7 +6,7 @@ module Spackle
       Util.log_debug("Retrieving customer data for #{id}")
       data = Spackle.store.get_customer_data(id)
       Util.log_debug("Retrieved customer data for #{id}: #{data}")
-      Customer.new(JSON.parse(data.items[0]['State']))
+      Customer.new(data)
     end
 
     def initialize(data)

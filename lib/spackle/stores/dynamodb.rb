@@ -4,7 +4,7 @@ require 'json'
 require 'logger'
 
 module Spackle
-  class DynamoDBStore
+  class DynamoDBStore < BaseStore
     @client = nil
     @store_config = {}
 
@@ -28,7 +28,7 @@ module Spackle
         raise SpackleError.new "Customer #{id} not found"
       end
 
-      data
+      JSON.parse(data.items[0]['State'])
     end
 
     private

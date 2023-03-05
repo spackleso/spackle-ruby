@@ -1,8 +1,7 @@
 require 'spackle'
 require 'minitest/autorun'
-require 'minitest/mock'
 
-class DynamoDBTest < Minitest::Test
+class DynamoDBStoreTest < Minitest::Test
   def test_retrieve()
     mock = Minitest::Mock.new
     def mock.query(query)
