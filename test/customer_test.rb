@@ -43,4 +43,32 @@ class CustomerTest < Minitest::Test
       customer.limit('not_found')
     end
   end
+
+  def test_subscriptions
+    customer = Spackle::Customer.new({
+      "subscriptions" => [
+          {
+              "id" => "sub_123",
+              "status" => "active",
+              "items" => {
+                  "data" => [
+                      {
+                          "id" => "si_123",
+                          "price" => {
+                              "id" => "price_123",
+                              "product" => {
+                                  "id" => "prod_123",
+                              },
+                          },
+                      }
+                  ]
+              },
+          }
+      ],
+      "features" => [{"key" => "foo", "value_flag" => true, "type" => 0}],
+    })
+    assert customer.subscriptions.size == 1
+    assert customer.subscriptions[0].id == "sub_123"
+    assert customer.subscriptions[0].status == "active"
+  end
 end

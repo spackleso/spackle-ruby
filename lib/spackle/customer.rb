@@ -1,3 +1,5 @@
+require 'stripe'
+
 module Spackle
   class Customer
     @data = nil
@@ -15,6 +17,18 @@ module Spackle
 
     def features
       return @data['features']
+    end
+
+    def subscriptions
+      subscriptions = []
+
+      @data['subscriptions'].each do |s|
+        subscription = Stripe::Subscription.new(s['id'])
+        subscription.update_attributes(s)
+        subscriptions.push(subscription)
+      end
+
+      subscriptions
     end
 
     def flag_features

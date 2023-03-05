@@ -63,6 +63,14 @@ customer.enabled("feature_key")
 customer.limit("feature_key")
 ```
 
+### Examine a customer's subscriptions
+
+A customer's current subscriptions are available on the `subscriptions` property. These are valid `Stripe::Subscription` objects as defined in the [Stripe Ruby library](https://stripe.com/docs/api/subscriptions/object?lang=ruby).
+
+```ruby
+customer.subscriptions
+```
+
 ## Logging
 The Spackle Ruby library emits logs as it performs various internal tasks. You can control the verbosity of Spackle's logging a few different ways:
 
