@@ -4,20 +4,7 @@ module Spackle
 
     def self.retrieve(id)
       Util.log_debug("Retrieving customer data for #{id}")
-      data = Spackle.client.query({
-        key_condition_expression: 'CustomerId = :customer_id',
-        filter_expression: 'Version = :version',
-        expression_attribute_values: {
-          ':customer_id' => id,
-          ':version' => Spackle.version
-        },
-        limit: 1
-      })
-
-      if not data.items.any?
-        raise SpackleError.new "Customer #{id} not found"
-      end
-
+      data = Spackle.store.get_customer_data(id)
       Util.log_debug("Retrieved customer data for #{id}: #{data}")
       Customer.new(JSON.parse(data.items[0]['State']))
     end

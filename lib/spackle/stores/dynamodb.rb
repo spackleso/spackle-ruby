@@ -1,20 +1,41 @@
 require 'aws-sdk'
 require 'net/http'
 require 'json'
+require 'logger'
 
 module Spackle
-  class DynamoDB
+  class DynamoDBStore
     @client = nil
-    @identity_id = nil
-    @table_name = nil
+    @store_config = {}
 
-    def initialize
-      @client = bootstrap_client
+    def initialize(client = nil, store_config = nil)
+      @client = client || bootstrap_client
+      @store_config = store_config || {}
     end
+
+    def get_customer_data(id)
+      data = query({
+        key_condition_expression: 'CustomerId = :customer_id',
+        filter_expression: 'Version = :version',
+        expression_attribute_values: {
+          ':customer_id' => id,
+          ':version' => Spackle.version
+        },
+        limit: 1
+      })
+
+      if not data.items.any?
+        raise SpackleError.new "Customer #{id} not found"
+      end
+
+      data
+    end
+
+    private
 
     def get_item(key)
       key = key.merge({
-        'AccountId' => @identity_id,
+        'AccountId' => @store_config['identity_id'],
       })
 
       response = @client.get_item({
@@ -26,19 +47,17 @@ module Spackle
     end
 
     def query(query)
-      query[:table_name] = @table_name
+      query[:table_name] = @store_config['table_name']
       query[:key_condition_expression] = 'AccountId = :account_id AND ' + query[:key_condition_expression]
       query[:expression_attribute_values] = query[:expression_attribute_values].merge({
-        ':account_id' => @identity_id
+        ':account_id' => @store_config['identity_id']
       })
-      response = @client.query(query)
+      @client.query(query)
     end
-
-    private
 
     def bootstrap_client
       Util.log_debug('Bootstrapping DynamoDB client...')
-      uri = URI(Spackle.api_base + '/auth/session')
+      uri = URI(Spackle.api_base + '/sessions')
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
 
@@ -49,12 +68,10 @@ module Spackle
       data = JSON.parse(response.body)
       Util.log_debug("Created session: #{data}")
 
-      @identity_id = data['identity_id']
-      @table_name = data['table_name']
-
+      @store_config = data['adapter']
       credentials = SpackleCredentials.new(
-        data['role_arn'],
-        data['token']
+        @store_config['role_arn'],
+        @store_config['token']
       )
 
       Aws::DynamoDB::Client.new(

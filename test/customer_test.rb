@@ -1,7 +1,7 @@
 require 'spackle'
-require 'test/unit'
+require 'minitest/autorun'
 
-class CustomerTest < Test::Unit::TestCase
+class CustomerTest < Minitest::Test
   def test_enabled
     customer = Spackle::Customer.new({
       'subscriptions' => [],
@@ -13,7 +13,7 @@ class CustomerTest < Test::Unit::TestCase
     })
 
     assert customer.enabled('flag')
-    assert_raise Spackle::SpackleError do
+    assert_raises Spackle::SpackleError do
       customer.enabled('not_found')
     end
   end
@@ -39,7 +39,7 @@ class CustomerTest < Test::Unit::TestCase
     assert customer.limit('unlimited') > 100
     assert_equal customer.limit('unlimited'), Float::INFINITY
 
-    assert_raise Spackle::SpackleError do
+    assert_raises Spackle::SpackleError do
       customer.limit('not_found')
     end
   end
