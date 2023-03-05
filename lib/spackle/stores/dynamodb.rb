@@ -9,8 +9,8 @@ module Spackle
     @store_config = {}
 
     def initialize(client = nil, store_config = nil)
-      @client = client || bootstrap_client
       @store_config = store_config || {}
+      @client = client || bootstrap_client
     end
 
     def get_customer_data(id)
