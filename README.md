@@ -112,3 +112,32 @@ Then configure the file store in your application:
 ```ruby
 Spackle.store = Spackle::FileStore.new('/app/spackle.json')
 ```
+
+## Usage in test environments
+
+In production, Spackle requires a valid Stripe customer. However, that is not ideal in testing or some development environments. As an alternative, you can use an in-memory store to test your application with seed data.
+
+```ruby
+Spackle.store = Spackle::MemoryStore.new()
+Spackle.store.set_customer_data("cus_000000000", {
+  "features": [
+    {
+      "key": "flag_feature",
+      "value_flag": True,
+    },
+    {
+      "key": "limit_feature",
+      "value_limit": 100,
+    },
+  ],
+  "subscriptions": [
+     {
+       "id": "sub_000000000",
+       "status": "trialing",
+       "quantity": 1,
+     }
+  ]
+})
+```
+
+**Note:** The in-memory store is not thread-safe and state will reset on each application restart.
