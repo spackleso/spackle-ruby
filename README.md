@@ -71,10 +71,29 @@ A customer's current subscriptions are available on the `subscriptions` property
 customer.subscriptions
 ```
 
+## Waiters
+
+There is a brief delay between when an action takes place in Stripe and when it is reflected in Spackle. To account for this, Spackle provides a `Waiters` module that can be used to wait for a Stripe object to be updated and replicated.
+
+1. Wait for a customer to be created
+   ```ruby
+   Spackle::Waiters.wait_for_customer("cus_00000000")
+   ```
+2. Wait for a subscription to be created
+   ```ruby
+   Spackle::Waiters.wait_for_subscription("cus_000000000", "sub_00000000")
+   ```
+3. Wait for a subscription to be updated
+   ```ruby
+   Spackle::Waiters.wait_for_subscription("cus_000000000", "sub_00000000", status: "active")
+   ```
+
+These will block until Spackle is updated with the latest information from Stripe or until a timeout occurs.
+
 ## Logging
 The Spackle Ruby library emits logs as it performs various internal tasks. You can control the verbosity of Spackle's logging a few different ways:
 
-1. Set the environment variable SPACKLE_LOG to the value `debug`, `info`, or `error`
+1. Set the environment variable SPACKLE_LOG to the value `debug`, `info`, `warn` or `error`
 
    ```sh
    $ export SPACKLE_LOG=debug

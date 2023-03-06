@@ -2,16 +2,18 @@ require 'stripe'
 
 module Spackle
   class Customer
-    @data = nil
+    attr_accessor :id
+    attr_accessor :data
 
     def self.retrieve(id)
       Util.log_debug("Retrieving customer data for #{id}")
       data = Spackle.store.get_customer_data(id)
       Util.log_debug("Retrieved customer data for #{id}: #{data}")
-      Customer.new(data)
+      Customer.new(id, data)
     end
 
-    def initialize(data)
+    def initialize(id, data)
+      @id = id
       @data = data
     end
 

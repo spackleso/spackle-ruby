@@ -17,6 +17,10 @@ module Spackle
         data = JSON.parse(content)
       end
 
+      if !data.has_key?(id)
+        raise SpackleError.new "Customer #{id} not found"
+      end
+
       data[id] = customer_data
       File.write(@path, JSON.pretty_generate(data))
     end

@@ -3,7 +3,7 @@ require 'minitest/autorun'
 
 class CustomerTest < Minitest::Test
   def test_enabled
-    customer = Spackle::Customer.new({
+    customer = Spackle::Customer.new('cus_000000000', {
       'subscriptions' => [],
       'features' => [{
         'type' => 0,
@@ -19,7 +19,7 @@ class CustomerTest < Minitest::Test
   end
 
   def test_limit
-    customer = Spackle::Customer.new({
+    customer = Spackle::Customer.new('cus_000000000', {
       'subscriptions' => [],
       'features' => [
         {
@@ -45,7 +45,7 @@ class CustomerTest < Minitest::Test
   end
 
   def test_subscriptions
-    customer = Spackle::Customer.new({
+    customer = Spackle::Customer.new('cus_000000000', {
       "subscriptions" => [
           {
               "id" => "sub_123",

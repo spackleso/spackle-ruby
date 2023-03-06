@@ -4,6 +4,7 @@ require 'forwardable'
 require 'spackle/customer'
 require 'spackle/spackle_configuration'
 require 'spackle/util'
+require 'spackle/waiters'
 
 require 'spackle/stores/base'
 require 'spackle/stores/dynamodb'

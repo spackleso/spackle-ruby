@@ -7,6 +7,10 @@ module Spackle
     end
 
     def get_customer_data(id)
+      if !@data.has_key?(id)
+        raise SpackleError.new "Customer #{id} not found"
+      end
+
       @data[id]
     end
 
