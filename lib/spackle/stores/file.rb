@@ -7,6 +7,11 @@ module Spackle
     def get_customer_data(id)
       content = File.read(@path)
       data = JSON.parse(content)
+
+      if !data.has_key?(id)
+        raise SpackleError.new "Customer #{id} not found"
+      end
+
       data[id]
     end
 
@@ -15,10 +20,6 @@ module Spackle
       if File.exist?(@path)
         content = File.read(@path)
         data = JSON.parse(content)
-      end
-
-      if !data.has_key?(id)
-        raise SpackleError.new "Customer #{id} not found"
       end
 
       data[id] = customer_data
