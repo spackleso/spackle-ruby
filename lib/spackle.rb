@@ -33,6 +33,10 @@ module Spackle
     def_delegators :@config, :version, :version=
   end
 
+  def self.bootstrap
+    Spackle.store
+  end
+
   class SpackleError < StandardError
   end
 end

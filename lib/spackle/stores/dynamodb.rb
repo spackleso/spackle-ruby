@@ -57,6 +57,11 @@ module Spackle
 
     def bootstrap_client
       Util.log_debug('Bootstrapping DynamoDB client...')
+
+      if Spackle.api_key.nil?
+        raise SpackleError.new 'API key not set'
+      end
+
       uri = URI(Spackle.api_base + '/sessions')
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
