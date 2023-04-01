@@ -4,10 +4,11 @@ require 'minitest/autorun'
 class DynamoDBStoreTest < Minitest::Test
   def test_retrieve()
     mock = Minitest::Mock.new
-    def mock.query(query)
+    def mock.get_item(table_item)
       res = Minitest::Mock.new
-      res.expect :items, [{"CustomerId" => "cus_000000000", "State" => "{\"subscriptions\":[],\"features\":[{\"type\":0,\"key\":\"flag\",\"value_flag\":true}]}"}]
-      res.expect :items, [{"CustomerId" => "cus_000000000", "State" => "{\"subscriptions\":[],\"features\":[{\"type\":0,\"key\":\"flag\",\"value_flag\":true}]}"}]
+      res.expect :nil?, false
+      res.expect :item, {"CustomerId" => "cus_000000000", "State" => "{\"subscriptions\":[],\"features\":[{\"type\":0,\"key\":\"flag\",\"value_flag\":true}]}"}
+      res.expect :item, {"CustomerId" => "cus_000000000", "State" => "{\"subscriptions\":[],\"features\":[{\"type\":0,\"key\":\"flag\",\"value_flag\":true}]}"}
     end
 
     Spackle.api_key = 'abc123'

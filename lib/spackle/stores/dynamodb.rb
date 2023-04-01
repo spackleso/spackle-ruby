@@ -14,45 +14,27 @@ module Spackle
     end
 
     def get_customer_data(id)
-      data = query({
-        key_condition_expression: 'CustomerId = :customer_id',
-        filter_expression: 'Version = :version',
-        expression_attribute_values: {
-          ':customer_id' => id,
-          ':version' => Spackle.version
-        },
-        limit: 1
-      })
+      result = get_item(id)
 
-      if not data.items.any?
+      if result.nil? or result.item.nil?
         raise SpackleError.new "Customer #{id} not found"
       end
 
-      JSON.parse(data.items[0]['State'])
+      JSON.parse(result.item['State'])
     end
 
     private
 
-    def get_item(key)
-      key = key.merge({
-        'AccountId' => @store_config['identity_id'],
+    def get_item(id)
+      return @client.get_item({
+        table_name: @store_config['table_name'],
+        key: {
+          AccountId: @store_config['identity_id'],
+          CustomerId: "#{id}:#{Spackle.version}"
+        }
       })
-
-      response = @client.get_item({
-        table_name: @table_name,
-        key: key
-      })
-
-      JSON.parse(response.item['State'])
-    end
-
-    def query(query)
-      query[:table_name] = @store_config['table_name']
-      query[:key_condition_expression] = 'AccountId = :account_id AND ' + query[:key_condition_expression]
-      query[:expression_attribute_values] = query[:expression_attribute_values].merge({
-        ':account_id' => @store_config['identity_id']
-      })
-      @client.query(query)
+    rescue StandardError
+        return nil
     end
 
     def bootstrap_client

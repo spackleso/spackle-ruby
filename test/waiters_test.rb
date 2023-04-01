@@ -7,7 +7,7 @@ class WaitersTest < Minitest::Test
     Spackle.store = Spackle::MemoryStore.new()
 
     assert_raises Spackle::SpackleError  do
-      customer = Spackle::Waiters.wait_for_customer('cus_000000000', 1)
+      Spackle::Waiters.wait_for_customer('cus_000000000', 1)
     end
 
     Spackle.store.set_customer_data('cus_000000000', {
@@ -39,7 +39,7 @@ class WaitersTest < Minitest::Test
     })
 
     assert_raises Spackle::SpackleError  do
-      subscription = Spackle::Waiters.wait_for_subscription('cus_000000000', 'sub_000000000', 1)
+      Spackle::Waiters.wait_for_subscription('cus_000000000', 'sub_000000000', 1)
     end
 
     Spackle.store.set_customer_data('cus_000000000', {
@@ -76,7 +76,7 @@ class WaitersTest < Minitest::Test
     })
 
     assert_raises Spackle::SpackleError  do
-      subscription = Spackle::Waiters.wait_for_subscription('cus_000000000', 'sub_000000000', 1, status: 'active')
+      Spackle::Waiters.wait_for_subscription('cus_000000000', 'sub_000000000', 1, status: 'active')
     end
 
     Spackle.store.set_customer_data('cus_000000000', {
