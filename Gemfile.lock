@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    spackle-ruby (0.0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -1372,6 +1377,7 @@ DEPENDENCIES
   minitest (~> 5.18)
   nokogiri (~> 1.13)
   rake (~> 13.0)
+  spackle-ruby!
   stripe (~> 8.3)
 
 BUNDLED WITH
