@@ -63,6 +63,7 @@ module Spackle
       )
 
       Aws::DynamoDB::Client.new(
+        region: @store_config['region'],
         credentials: credentials,
       )
     end
