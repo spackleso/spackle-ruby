@@ -58,7 +58,8 @@ module Spackle
       @store_config = data['adapter']
       credentials = SpackleCredentials.new(
         @store_config['role_arn'],
-        @store_config['token']
+        @store_config['token'],
+        @store_config['region'],
       )
 
       Aws::DynamoDB::Client.new(
@@ -71,13 +72,18 @@ module Spackle
     include Aws::CredentialProvider
     include Aws::RefreshingCredentials
 
+    @region = nil
     @role_arn = nil
     @token = nil
 
-    def initialize(role_arn, token)
-      @client = Aws::STS::Client.new(:credentials => false)
+    def initialize(role_arn, token, region)
+      @region = region
       @role_arn = role_arn
       @token = token
+      @client = Aws::STS::Client.new(
+        region: @region,
+        credentials: false,
+      )
       super()
     end
 
