@@ -16,10 +16,29 @@ module Spackle
       result = get_item(id)
 
       if result.nil? or result.item.nil?
-        raise SpackleError.new "Customer #{id} not found"
+        return fetch_state_from_api(id)
       end
 
       JSON.parse(result.item['State'])
+    end
+
+    def fetch_state_from_api(id)
+      Util.log_warn("Customer #{id} not found in DynamoDB. Fetching from API...")
+      uri = URI(Spackle.api_base + '/customers/' + id + '/state')
+      https = Net::HTTP.new(uri.host, uri.port)
+      https.use_ssl = true
+
+      request = Net::HTTP::Get.new(uri.path)
+      request['Authorization'] = 'Bearer ' + Spackle.api_key
+
+      response = https.request(request)
+      if response.code != '200'
+        puts response.code
+        puts response.body
+        raise SpackleError.new "Customer #{id} not found"
+      end
+
+      JSON.parse(response.body)
     end
 
     private
