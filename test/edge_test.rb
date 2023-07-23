@@ -8,11 +8,10 @@ class EdgeStoreTest < Minitest::Test
     stub_request(:get, "https://us-west-2.edge.spackle.so/customers/cus_000000000/state")
       .with(
         headers: {
-            'Accept'=>'*/*',
-            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-            'Authorization'=>'Bearer abc123',
-            'User-Agent'=>'Ruby',
-            'X-Spackle-Schema-Version'=>'1'
+          'Authorization'=>'Bearer abc123',
+          'Connection'=>'Keep-Alive',
+          'Host'=>'us-west-2.edge.spackle.so',
+          'User-Agent'=>'http.rb/5.1.1'
         }
       )
       .to_return(
@@ -30,11 +29,10 @@ class EdgeStoreTest < Minitest::Test
     stub_request(:get, "https://us-west-2.edge.spackle.so/customers/cus_000000000/state")
       .with(
         headers: {
-            'Accept'=>'*/*',
-            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-            'Authorization'=>'Bearer abc123',
-            'User-Agent'=>'Ruby',
-            'X-Spackle-Schema-Version'=>'1'
+          'Authorization'=>'Bearer abc123',
+          'Connection'=>'Keep-Alive',
+          'Host'=>'us-west-2.edge.spackle.so',
+          'User-Agent'=>'http.rb/5.1.1'
         }
       )
       .to_return(
@@ -46,11 +44,10 @@ class EdgeStoreTest < Minitest::Test
     stub_request(:get, "https://api.spackle.so/v1/customers/cus_000000000/state")
       .with(
         headers: {
-            'Accept'=>'*/*',
-            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-            'Authorization'=>'Bearer abc123',
-            'User-Agent'=>'Ruby',
-            'X-Spackle-Schema-Version'=>'1'
+          'Authorization'=>'Bearer abc123',
+          'Connection'=>'Keep-Alive',
+          'Host'=>'api.spackle.so',
+          'User-Agent'=>'http.rb/5.1.1'
         }
       )
       .to_return(
