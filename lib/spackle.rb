@@ -7,7 +7,7 @@ require 'spackle/util'
 require 'spackle/waiters'
 
 require 'spackle/stores/base'
-require 'spackle/stores/dynamodb'
+require 'spackle/stores/edge'
 require 'spackle/stores/file'
 require 'spackle/stores/memory'
 
@@ -27,14 +27,11 @@ module Spackle
 
     def_delegators :@config, :api_key, :api_key=
     def_delegators :@config, :api_base, :api_base=
+    def_delegators :@config, :edge_base, :edge_base=
     def_delegators :@config, :log_level, :log_level=
     def_delegators :@config, :store, :store=
     def_delegators :@config, :logger, :logger=
     def_delegators :@config, :version, :version=
-  end
-
-  def self.bootstrap
-    Spackle.store
   end
 
   class SpackleError < StandardError
