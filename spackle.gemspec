@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(::File.join(::File.dirname(__FILE__), "lib"))
 
 Gem::Specification.new do |s|
   s.name          = "spackle-ruby"
-  s.version       = "0.0.16"
+  s.version       = "0.0.17"
   s.summary       = "Spackle Ruby gem"
   s.description   = "Spackle is the easiest way to integrate your Ruby app with Stripe Billing. " \
                     "See https://www.spackle.so for details."
