@@ -2,6 +2,7 @@ require 'logger'
 require 'forwardable'
 
 require 'spackle/customer'
+require 'spackle/pricing_table'
 require 'spackle/spackle_configuration'
 require 'spackle/util'
 require 'spackle/waiters'
