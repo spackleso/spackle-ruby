@@ -168,7 +168,7 @@ Then configure the file store in your application:
 Spackle.store = Spackle::FileStore.new('/app/spackle.json')
 ```
 
-## Usage in test environments
+#### Usage in test environments
 
 In production, Spackle requires a valid Stripe customer. However, that is not ideal in testing or some development environments. As an alternative, you can use an in-memory store to test your application with seed data.
 
