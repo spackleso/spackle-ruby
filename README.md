@@ -33,14 +33,6 @@ require 'spackle'
 Spackle.api_key = "<api key>"
 ```
 
-### Bootstrap the client (optional)
-
-The Spackle client requires a single initialization step that includes a network request. To front load this process, you can call the `bootstrap` method in your codebase.
-
-```ruby
-Spackle.bootstrap()
-```
-
 ## Usage
 
 ### Pricing tables
