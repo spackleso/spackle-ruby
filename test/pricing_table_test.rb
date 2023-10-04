@@ -41,7 +41,7 @@ class PricingTableTest < Minitest::Test
           'Authorization'=>'Bearer abc123',
           'Connection'=>'keep-alive',
           'Keep-Alive'=>'30',
-          'User-Agent'=>'Faraday v2.7.10',
+          'User-Agent'=>'Faraday v2.7.11',
         }
       )
       .to_return(
