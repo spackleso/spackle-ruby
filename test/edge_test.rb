@@ -11,6 +11,8 @@ class EdgeStoreTest < Minitest::Test
           'Accept'=>'*/*',
           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
           'Authorization'=>'Bearer abc123',
+          'Connection'=>'keep-alive',
+          'Keep-Alive'=>'30',
           'User-Agent'=>'Faraday v2.7.10',
           'X-Spackle-Schema-Version'=>'1'
         }
@@ -33,6 +35,8 @@ class EdgeStoreTest < Minitest::Test
           'Accept'=>'*/*',
           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
           'Authorization'=>'Bearer abc123',
+          'Connection'=>'keep-alive',
+          'Keep-Alive'=>'30',
           'User-Agent'=>'Faraday v2.7.10',
           'X-Spackle-Schema-Version'=>'1'
         }
