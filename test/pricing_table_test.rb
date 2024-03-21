@@ -41,9 +41,8 @@ class PricingTableTest < Minitest::Test
           'Authorization'=>'Bearer abc123',
           'Connection'=>'keep-alive',
           'Keep-Alive'=>'30',
-          'User-Agent'=>'Faraday v2.7.11',
-        }
-      )
+          'User-Agent'=>'Faraday v2.7.10'
+        })
       .to_return(
         status: 200,
         body: data.to_json,
@@ -51,7 +50,7 @@ class PricingTableTest < Minitest::Test
       )
 
     Spackle.api_key = 'abc123'
-    Spackle.store = Spackle::EdgeStore.new()
+    Spackle.store = Spackle::ApiStore.new()
     pricing_table = Spackle::PricingTable.retrieve('abcde123')
     assert pricing_table == data
   end

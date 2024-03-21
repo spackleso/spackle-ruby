@@ -4,13 +4,11 @@ module Spackle
   class SpackleConfiguration
     attr_accessor :api_key
     attr_accessor :api_base
-    attr_accessor :edge_base
     attr_reader   :logger
     attr_reader   :version
 
     def initialize
       @api_base = 'https://api.spackle.so/v1'
-      @edge_base = 'https://us-west-2.edge.spackle.so'
       @log_level = Logger::WARN
       @logger = Logger.new(STDOUT, level: @log_level)
       @version = 1
@@ -28,7 +26,7 @@ module Spackle
 
     def store()
       if @store == nil
-        @store = EdgeStore.new
+        @store = ApiStore.new
       end
       @store
     end
